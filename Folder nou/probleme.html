@@ -1,0 +1,397 @@
+<html>
+<head>
+<link rel="stylesheet" href="probleme.css">
+    <title>tehnici de programare</title>
+</head>
+<body>
+<div class="container">
+     <h1 style="font-size: 60px;">Tehnici de programare.</h1>
+</div>
+    
+  <p style="color: black; font-size: 30px;">   Probleme rezolvate prin diverse tehnici de programare.  
+</p>
+<nav>
+    <ul class="menu">
+        <li><a href="#sectiune-0">Backtracking</a></li>
+        <li><a href="#sectiune-1">Trierea</a></li>
+        <li><a href="#sectiune-2">Recursia</a></li>
+        <li><a href="#sectiune-3">Greedy</a></li>
+    </ul>
+</nav>
+ <img src="02.jpeg" alt="Descriere a imaginii" style="width: 100%; height: auto;">
+
+<h2 id="sectiune-0"> 
+<div class="container">
+     <h1 style="font-size: 30px;">Backtracking</h1>
+</div>
+ <p class="highlighted-text"> 1. Problema Permutărilor </p>
+<p  style="font-size: 15px;"> ( Găsiți toate permutările unui șir dat.)</p>
+<p  style="font-size: 20px;">#include (iostream)</p>
+<p  style="font-size: 20px;">#include (vector)</p>
+
+<p  style="font-size: 20px;">void permutari(std::vector<int>& sir, int index) {</p>
+    <p  style="font-size: 20px;">if (index == sir.size() - 1) {</p>
+       <p  style="font-size: 20px;"> for (int numar : sir) {</p>
+           <p  style="font-size: 20px;"> std::cout << numar << " ";</p>
+       <p  style="font-size: 20px;"> }</p>
+       <p  style="font-size: 20px;"> std::cout << std::endl;</p>
+       <p  style="font-size: 20px;"> return;</p>
+   <p  style="font-size: 20px;"> }</p>
+
+   <p  style="font-size: 20px;"> for (int i = index; i < sir.size(); ++i) {</p>
+       <p  style="font-size: 20px;"> std::swap(sir[index], sir[i]);</p>
+       <p  style="font-size: 20px;"> permutari(sir, index + 1);</p>
+       <p  style="font-size: 20px;"> std::swap(sir[index], sir[i]);</p>
+   <p  style="font-size: 20px;"> }</p>
+<p  style="font-size: 20px;">}</p>
+
+<p  style="font-size: 20px;">int main() {</p>
+   <p  style="font-size: 20px;"> std::vector<int> sir = {1, 2, 3};</p>
+
+    <p  style="font-size: 20px;">std::cout << "Permutarile sirului sunt:\n";</p>
+   <p  style="font-size: 20px;"> permutari(sir, 0);</p>
+
+    <p  style="font-size: 20px;">return 0;</p>
+<p  style="font-size: 20px;">}</p>
+
+ <p class="highlighted-text"> 2. Problema Combinarii Sumelor </p>
+<p  style="font-size: 20px;">#include (iostream)</p>
+<p  style="font-size: 20px;">#include (vector)</p>
+
+<p  style="font-size: 20px;">void backtrackingSume(std::vector<int>& vec, int index, int sumaCurenta,</p> <p  style="font-size: 20px;">int sumaDorita, std::vector<int>& solutie) {</p>
+  <p  style="font-size: 20px;">  if (sumaCurenta == sumaDorita) {</p>
+        <p  style="font-size: 20px;">std::cout << "Combinație gasită cu suma " << sumaDorita << ": ";</p>
+       <p  style="font-size: 20px;"> for (int element : solutie) {</p>
+           <p  style="font-size: 20px;"> std::cout << element << " ";</p>
+       <p  style="font-size: 20px;"> }</p>
+       <p  style="font-size: 20px;"> std::cout << std::endl;</p>
+       <p  style="font-size: 20px;"> return;</p>
+   <p  style="font-size: 20px;"> }</p>
+
+   <p  style="font-size: 20px;"> for (int i = index; i < vec.size(); ++i) {</p>
+       <p  style="font-size: 20px;"> if (sumaCurenta + vec[i] <= sumaDorita) {</p>
+         <p  style="font-size: 20px;">   solutie.push_back(vec[i]);</p>
+          <p  style="font-size: 20px;">  backtrackingSume(vec, i, sumaCurenta + vec[i],</p>
+
+
+ <p class="highlighted-text">3. Problema Reuniunii a Două Șiruri </p>
+ <p  style="font-size: 15px;"> ( Găsiți toate modurile de a forma un șir folosind intercalarea a două șiruri date.) </p>
+ <p  style="font-size: 20px;">#include (iostream)</p>
+ <p  style="font-size: 20px;">#include (vector)</p>
+ <p  style="font-size: 20px;">#include (string)</p>
+
+ <p  style="font-size: 20px;">void backtrackingInterclasare(std::string& rezultat, const std::string& s1, const std::string& s2, int i, int j) {</p>
+    <p  style="font-size: 20px;"> if (i == s1.length() && j == s2.length()) {</p>
+       <p  style="font-size: 20px;">  std::cout << rezultat << std::endl;</p>
+        <p  style="font-size: 20px;"> return;</p>
+     <p  style="font-size: 20px;">}</p>
+
+     <p  style="font-size: 20px;">if (i < s1.length()) {</p>
+       <p  style="font-size: 20px;">  rezultat.push_back(s1[i]);</p>
+        <p  style="font-size: 20px;"> backtrackingInterclasare(rezultat, s1, s2, i + 1, j);</p>
+       <p  style="font-size: 20px;">  rezultat.pop_back();</p>
+    <p  style="font-size: 20px;"> }</p>
+
+     <p  style="font-size: 20px;">if (j < s2.length()) {</p>
+         <p  style="font-size: 20px;">rezultat.push_back(s2[j]);</p>
+         <p  style="font-size: 20px;">backtrackingInterclasare(rezultat, s1, s2, i, j + 1);</p>
+         <p  style="font-size: 20px;">rezultat.pop_back();</p>
+   <p  style="font-size: 20px;">  }</p>
+ <p  style="font-size: 20px;">}</p>
+
+ <p  style="font-size: 20px;">void interclasareSiruri(const std::string& s1, const std::string& s2) {</p>
+    <p  style="font-size: 20px;"> std::string rezultat;</p>
+    <p  style="font-size: 20px;"> backtrackingInterclasare(rezultat, s1, s2, 0, 0);</p>
+ <p  style="font-size: 20px;">}</p>
+
+ <p  style="font-size: 20px;">int main() {</p>
+    <p  style="font-size: 20px;"> std::string s1 = "abc";</p>
+    <p  style="font-size: 20px;"> std::string s2 = "def";</p>
+
+    <p  style="font-size: 20px;"> std::cout << "Rezultatele interclasarii sunt:\n";</p>
+    <p  style="font-size: 20px;"> interclasareSiruri(s1, s2);</p>
+
+    <p  style="font-size: 20px;"> return 0;</p>
+ <p  style="font-size: 20px;">}</p>
+</h2>
+
+<hr style="width: 100%;">
+
+
+
+
+
+<h2 id="sectiune-1"> 
+<div class="container">
+     <h1 style="font-size: 30px;">Trierea </h1>
+</div>
+ <p class="highlighted-text"> 1. Sortarea unui vector de numere </p>
+  <p style="font-size: 20px;"> #include (iostream)
+<p  style="font-size: 20px;">#include (vector) </p>
+<p  style="font-size: 20px;">#include (algoritm)</p>
+
+<p style="font-size: 20px;">using namespace std;</p>
+
+<p style="font-size: 20px;"> int main() { </p>
+    <p style="font-size: 20px;">vector(int) nums = {4, 2, 7, 1, 5};</p>
+
+    
+   <p style="font-size: 20px;"> sort(nums.begin(), nums.end());</p>
+
+
+    <p style="font-size: 20px;">for (int num : nums)</p>
+        <p style="font-size: 20px;">cout << num << " ";</p>
+    <p style="font-size: 20px;">cout << endl };</p>
+
+    <p style="font-size: 20px;>return 0;</p>
+
+ <p class="highlighted-text">2. </p>
+ <p class="highlighted-text1">  2. Sortarea unei matrice pe coloane specific </p>
+
+<p style="font-size: 20px;">#include (iostream)</p>
+
+<p style="font-size: 20px;">#include (vector)</p>
+
+<p style="font-size: 20px;">#include (algorithm)</p>
+
+
+<p style="font-size: 20px;">using namespace std;</p>
+
+
+<p style="font-size: 20px;">bool compareColumns(const vector<int>& a, const vector<int>& b) {</p>
+
+   <p style="font-size: 20px;"> return a[1] < b[1]; // Sortare pe coloana index 1
+}</p>
+
+
+<p style="font-size: 20px;">int main() {</p>
+
+  <p style="font-size: 20px;">  vector<vector<int>> matrix = {{1, 3, 5}, {4, 2, 6}, {7, 9, 8}};</p>
+
+
+   
+   <p style="font-size: 20px;"> sort(matrix.begin(), matrix.end(), compareColumns);</p>
+
+
+   
+    <p style="font-size: 20px;">for (const auto& row : matrix) {</p>
+
+       <p style="font-size: 20px;"> for (int num : row)</p>
+
+          <p style="font-size: 20px;">  cout << num << " ";</p>
+
+       <p style="font-size: 20px;"> cout << endl;</p>
+
+    }</p>
+
+
+   <p style="font-size: 20px;"> return 0;
+}</p>
+<p class="highlighted-text1"> 3. Sortarea unei colecții de obiecte personalizate </p>
+<p style="font-size: 20px;">#include (iostream)</p>
+<p style="font-size: 20px;">#include (vector)</p>
+<p style="font-size: 20px;">#include (algorithm)</p>
+
+<p style="font-size: 20px;">using namespace std;</p>
+
+<p style="font-size: 20px;">struct Person {</p>
+    <p style="font-size: 20px;">string name;</p>
+   <p style="font-size: 20px;"> int age;</p>
+<p style="font-size: 20px;">};
+</p>
+<p style="font-size: 20px;">bool compareAge(const Person& a, const Person& b) {</p>
+    <p style="font-size: 20px;">return a.age < b.age;
+}</p>
+
+<p style="font-size: 20px;">int main() {</p>
+   <p style="font-size: 20px;"> vector<Person> people = {{"Alice", 20}, {"Bob", 18}, {"Charlie", 22}};</p>
+
+    
+   <p style="font-size: 20px;"> sort(people.begin(), people.end(), compareAge);</p>
+
+    
+   <p style="font-size: 20px;"> for (const auto& person : people)</p>
+       <p style="font-size: 20px;"> cout << person.name << " - " << person.age << " years old" << endl;</p>
+
+   <p style="font-size: 20px;"> return 0;
+}</p>
+</h2>
+<hr style="width: 100%;">
+ 
+
+<h2 id="sectiune-2"> 
+<div class="container">
+     <h1 style="font-size: 30px;">Recursia</h1>
+</div>
+<p class="highlighted-text1"> 1.Secvență Fibonacci </p>
+<p style="font-size: 20px;">#include (iostream)</p>
+
+<p style="font-size: 20px;">unsigned long long factorial(unsigned int n) {</p>
+    <p style="font-size: 20px;">if (n == 0 || n == 1) {</p>
+      <p style="font-size: 20px;">  return 1;</p>
+   <p style="font-size: 20px;"> } else {</p>
+      <p style="font-size: 20px;">  return n * factorial(n - 1);</p>
+   <p style="font-size: 20px;"> }</p>
+<p style="font-size: 20px;">}</p>
+
+<p style="font-size: 20px;">int main() {</p>
+   <p style="font-size: 20px;"> unsigned int numar;</p>
+   <p style="font-size: 20px;"> std::cout << "Introduceti un numar: ";</p>
+    <p style="font-size: 20px;">std::cin >> numar;</p>
+   <p style="font-size: 20px;"> std::cout << "Factorialul este: " << factorial(numar) << std::endl;</p>
+   <p style="font-size: 20px;"> return 0;
+}</p>
+<p class="highlighted-text1"> 2.Factorialul unui număr </p>
+<p style="font-size: 20px;">#include (iostream)</p>
+
+<p style="font-size: 20px;">unsigned long long factorial(unsigned int n) {</p>
+   <p style="font-size: 20px;"> if (n == 0 || n == 1) {</p>
+      <p style="font-size: 20px;">  return 1;</p>
+   <p style="font-size: 20px;"> } else {</p>
+      <p style="font-size: 20px;">  return n * factorial(n - 1);</p>
+ <p style="font-size: 20px;">   }</p>
+<p style="font-size: 20px;">}</p>
+
+<p style="font-size: 20px;">int main() {</p>
+   <p style="font-size: 20px;"> unsigned int numar;</p>
+   <p style="font-size: 20px;"> std::cout << "Introduceti un numar: ";</p>
+   <p style="font-size: 20px;"> std::cin >> numar;</p>
+   <p style="font-size: 20px;"> std::cout << "Factorialul este: " << factorial(numar) << std::endl;</p>
+   <p style="font-size: 20px;"> return 0;</p>
+<p style="font-size: 20px;">}</p>
+<p class="highlighted-text1"> 3.Suma cifrelor unui număr</p>
+
+ <p style="font-size: 20px;">#include (iostream)</p>
+
+ <p style="font-size: 20px;">int sumaCifre(int n) {</p>
+    <p style="font-size: 20px;"> if (n == 0) {</p>
+       <p style="font-size: 20px;">  return 0;</p>
+    <p style="font-size: 20px;"> } else {</p>
+       <p style="font-size: 20px;">  return n % 10 + sumaCifre(n / 10);</p>
+   <p style="font-size: 20px;">  }</p>
+ <p style="font-size: 20px;">}</p>
+
+ <p style="font-size: 20px;">int main() {</p>
+     <p style="font-size: 20px;">int numar;</p>
+     <p style="font-size: 20px;">std::cout << "Introduceti un numar: ";</p>
+    <p style="font-size: 20px;"> std::cin >> numar;</p>
+    <p style="font-size: 20px;"> std::cout << "Suma cifrelor este: " << sumaCifre(numar) << std::endl;</p>
+     <p style="font-size: 20px;">return 0;</p>
+ <p style="font-size: 20px;">}</p>
+</h2>
+<hr style="width: 100%;">
+
+
+
+
+
+<h2 id="sectiune-3"> 
+<div class="container">
+     <h1 style="font-size: 30px;">Greedy</h1>
+</div>
+<p class="highlighted-text1"> 1. Problema Sumelor Adiacente Maxime </p>
+<p style="font-size: 15px;">  ( Date fiind n numere, găsiți suma maximă a numerelor adiacente dintr-o secvență.)</p>
+<p style="font-size: 20px;">#include (iostream)</p>
+<p style="font-size: 20px;">#include (vector)</p>
+
+<p style="font-size: 20px;">int sumaMaximaSumeAdiacente(const std::vector<int>& numere) {</p>
+   <p style="font-size: 20px;"> int n = numere.size();</p>
+   <p style="font-size: 20px;"> if (n <= 1) return 0;</p>
+
+    <p style="font-size: 20px;">int sumaAnterioara = numere[0];</p>
+   <p style="font-size: 20px;"> int sumaCurenta = std::max(numere[0], numere[1]);</p>
+    
+   <p style="font-size: 20px;"> for (int i = 2; i < n; ++i) {</p>
+       <p style="font-size: 20px;"> int sumaTemp = std::max(sumaCurenta, sumaAnterioara + numere[i]);</p>
+       <p style="font-size: 20px;"> sumaAnterioara = sumaCurenta;</p>
+       <p style="font-size: 20px;"> sumaCurenta = sumaTemp;</p>
+   <p style="font-size: 20px;"> }</p>
+
+  <p style="font-size: 20px;">  return sumaCurenta;</p>
+<p style="font-size: 20px;">}</p>
+<p class="highlighted-text1"> 2. Problema Ghiozdanului Fracționat </p>
+
+<p style="font-size: 15px;">  ( Alegeți obiecte dintr-o listă astfel încât să umpleți un ghiozdan până la o capacitate dată maximă, obținând valoarea maximă, având opțiunea de a lua fracțiuni din obiecte.)</p>
+<p style="font-size: 20px;">#include (iostream)</p>
+<p style="font-size: 20px;">#include (vector)</p>
+<p style="font-size: 20px;">#include (algorithm)</p>
+
+<p style="font-size: 20px;">struct Obiect {</p>
+  <p style="font-size: 20px;">  int greutate;</p>
+   <p style="font-size: 20px;"> int valoare;</p>
+<p style="font-size: 20px;">};</p>
+
+<p style="font-size: 20px;">bool comparaRaport(Obiect a, Obiect b) {</p>
+  <p style="font-size: 20px;">  double raportA = (double)a.valoare / a.greutate;</p>
+   <p style="font-size: 20px;"> double raportB = (double)b.valoare / b.greutate;</p>
+   <p style="font-size: 20px;"> return raportA > raportB;</p>
+<p style="font-size: 20px;">}</p>
+
+<p style="font-size: 20px;">double ghiozdanFactionat(std::vector<Obiect>& obiecte, int capacitate) {</p>
+  <p style="font-size: 20px;">  std::sort(obiecte.begin(), obiecte.end(), comparaRaport);</p>
+
+  <p style="font-size: 20px;">  double valoareTotala = 0.0;</p>
+  <p style="font-size: 20px;">  for (const auto& obiect : obiecte) {</p>
+     <p style="font-size: 20px;">   if (capacitate >= obiect.greutate) {</p>
+           <p style="font-size: 20px;"> capacitate -= obiect.greutate;</p>
+           <p style="font-size: 20px;"> valoareTotala += obiect.valoare;</p>
+      <p style="font-size: 20px;">  } else {</p>
+         <p style="font-size: 20px;">   double fractie = (double)capacitate / obiect.greutate;</p>
+          <p style="font-size: 20px;">  valoareTotala += obiect.valoare * fractie;</p>
+          <p style="font-size: 20px;">  break;</p>
+       <p style="font-size: 20px;"> }</p>
+    <p style="font-size: 20px;">}</p>
+   <p style="font-size: 20px;"> return valoareTotala;</p>
+<p style="font-size: 20px;">}</p>
+
+<p style="font-size: 20px;">int main() {</p>
+   <p style="font-size: 20px;"> std::vector<Obiect> obiecte = {{10, 60}, {20, 100}, {30, 120}};</p>
+   <p style="font-size: 20px;"> int capacitateGhiozdan = 50;</p>
+
+    <p style="font-size: 20px;">double valoareMaxima = ghiozdanFactionat(obiecte, </p>capacitateGhiozdan);</p>
+   <p style="font-size: 20px;"> std::cout << "Valoare maxima ce poate fi pusa in ghiozdan: "</p> << valoareMaxima << std::endl;</p>
+
+  <p style="font-size: 20px;">  return 0;</p>
+<p style="font-size: 20px;">}</p>
+
+
+<p class="highlighted-text1"> 3. Problema Programării Activităților </p>
+<p  style="font-size: 15px;"> (Alegeți un set de activități care să nu se suprapună, maximizând numărul de activități selectate.) </p>
+<p style="font-size: 20px;">#include (iostream)</p>
+<p style="font-size: 20px;">#include (vector)</p>
+<p style="font-size: 20px;">#include (algorithm)</p>
+
+<p style="font-size: 20px;">struct Activitate {</p>
+  <p style="font-size: 20px;">  int inceput;</p>
+   <p style="font-size: 20px;"> int sfarsit;</p>
+<p style="font-size: 20px;">};</p>
+
+<p style="font-size: 20px;">bool comparaSfarsit(Activitate a, Activitate b) {</p>
+  <p style="font-size: 20px;">  return a.sfarsit < b.sfarsit;</p>
+<p style="font-size: 20px;">}</p>
+
+<p style="font-size: 20px;">int numarMaximActivitati(std::vector<Activitate>& activitati) {</p>
+ <p style="font-size: 20px;">   if (activitati.empty()) return 0;</p>
+
+   <p style="font-size: 20px;"> std::sort(activitati.begin(), activitati.end(), comparaSfarsit);</p>
+   <p style="font-size: 20px;"> int numarActivitati = 1;</p>
+   <p style="font-size: 20px;"> int activitateSelectata = 0;</p>
+
+   <p style="font-size: 20px;"> for (int i = 1; i < activitati.size(); ++i) {</p>
+      <p style="font-size: 20px;">  if (activitati[i].inceput >= activitati[activitateSelectata].sfarsit) {
+            ++numarActivitati;</p>
+           <p style="font-size: 20px;"> activitateSelectata = i;</p>
+       <p style="font-size: 20px;"> }</p>
+   <p style="font-size: 20px;"> }</p>
+
+    <p style="font-size: 20px;">return numarActivitati;</p>
+<p style="font-size: 20px;">}</p>
+
+<p style="font-size: 20px;">int main() {</p>
+   <p style="font-size: 20px;"> std::vector<Activitate> activitati = {{1, 4}, {3, 5}, {0, 6}, {5, 7}, {3, 8}, {5, 9}, {6, 10}, {8, 11}, {8, 12}, {2, 13}, {12, 14}};</p>
+    <p style="font-size: 20px;">std::cout << "Numarul maxim de activitati selectate: " </p><< numarMaximActivitati(activitati) << std::endl;</p>
+   <p style="font-size: 20px;"> return 0;</p>
+<p style="font-size: 20px;">}</p>
+</h2>
+</body>
+</html>

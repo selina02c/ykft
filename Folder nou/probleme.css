@@ -1,0 +1,58 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #b1aeb4;
+}
+
+h1 {
+    color: rgb(2, 2, 2);
+}
+.text-mica {
+    font-size: 12px; /* dimensiunea textului în pixeli */
+}
+
+p {
+    font-size: 5px;
+}
+.container {
+    text-align: center;
+}
+/* Resetarea stilurilor implicite */
+body, ul {
+    margin: 10;
+    padding: 30;
+}
+
+/* Stilizare meniu */
+nav {
+    background-color: #333;
+}
+
+.menu {
+    list-style: none;
+    display: flex;
+}
+
+.menu li {
+    margin-right: 50px;
+}
+
+.menu li a {
+    text-decoration: none;
+    color: #fff;
+    padding: 20px;
+    transition: color 0.3s ease;
+}
+
+.menu li a:hover {
+    color: #ffcc00;
+}
+.highlighted-text {
+    color:antiquewhite;
+    font-size: 30px;
+    font-weight: bold;
+}
+.highlighted-text1 {
+    color:antiquewhite;
+    font-size: 30px;
+    font-weight: bold;
+}
